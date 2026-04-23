@@ -1,0 +1,44 @@
+{
+  "config": {
+    "version": "",
+    "exam_name": "",
+	"link_base_url":"",
+	"link_folder_name" : "",
+	"link_file_name" : "",
+	"link_terms" : "",
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "time_limit_minutes": 60
+  },
+  "questions": [
+    {
+      "id": 1,
+      "problem_description": [
+        {
+          "line": ""
+        }
+      ],
+      "question": [
+        {
+          "line": ""
+        }
+      ],
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": "",
+        "E": ""
+      },
+      "answer": "",
+      "resource": {
+        "code": {
+          "lines": [
+            { "line": "# First Line" }
+          ],
+          "language": ""
+        }
+      }
+    }
+  ]
+}

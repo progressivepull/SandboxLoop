@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Template JSON Generator</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .question-block {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    textarea { width: 100%; height: 60px; }
+    input[type="text"] { width: 100%; }
+  </style>
+</head>
+
+<body>
+
+<h2>Template JSON Generator</h2>
+
+<label>How many questions?</label>
+<input type="number" id="questionCount" min="1" value="1">
+<button onclick="generateFields()">Generate</button>
+
+<div id="questionsContainer"></div>
+
+<button onclick="generateJSON()" style="margin-top:20px;">Download JSON</button>
+
+<script>
+// ===============================
+// Generate Question Input Fields
+// ===============================
+function generateFields() {
+    const count = parseInt(document.getElementById("questionCount").value);
+    const container = document.getElementById("questionsContainer");
+    container.innerHTML = "";
+
+    for (let i = 1; i <= count; i++) {
+        const block = document.createElement("div");
+        block.className = "question-block";
+
+        block.innerHTML = `
+            <h3>Question ${i}</h3>
+
+            <label>Problem Description:</label>
+            <textarea id="pd_${i}"></textarea>
+
+            <label>Question Text:</label>
+            <textarea id="q_${i}"></textarea>
+
+            <label>Option A:</label>
+            <input type="text" id="A_${i}">
+
+            <label>Option B:</label>
+            <input type="text" id="B_${i}">
+
+            <label>Option C:</label>
+            <input type="text" id="C_${i}">
+
+            <label>Option D:</label>
+            <input type="text" id="D_${i}">
+
+            <label>Option E:</label>
+            <input type="text" id="E_${i}">
+
+            <label>Correct Answer (A–E):</label>
+            <input type="text" id="ans_${i}">
+        `;
+
+        container.appendChild(block);
+    }
+}
+
+// ===============================
+// Build JSON + Download File
+// ===============================
+function generateJSON() {
+    const count = parseInt(document.getElementById("questionCount").value);
+
+    const template = {
+        config: {
+            version: "",
+            exam_name: "",
+            link_base_url: "",
+            link_folder_name: "",
+            link_file_name: "",
+            link_terms: "",
+            shuffle_questions: true,
+            shuffle_options: true,
+            time_limit_minutes: 60
+        },
+        questions: []
+    };
+
+    for (let i = 1; i <= count; i++) {
+        template.questions.push({
+            id: i,
+            problem_description: [{ line: document.getElementById(`pd_${i}`).value }],
+            question: [{ line: document.getElementById(`q_${i}`).value }],
+            options: {
+                A: document.getElementById(`A_${i}`).value,
+                B: document.getElementById(`B_${i}`).value,
+                C: document.getElementById(`C_${i}`).value,
+                D: document.getElementById(`D_${i}`).value,
+                E: document.getElementById(`E_${i}`).value
+            },
+            answer: document.getElementById(`ans_${i}`).value,
+            resource: {
+                code: {
+                    lines: [{ line: "# First Line" }],
+                    language: ""
+                }
+            }
+        });
+    }
+
+    const blob = new Blob([JSON.stringify(template, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "template.json";
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
+</script>
+
+</body>
+</html>

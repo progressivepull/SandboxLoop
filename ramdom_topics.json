@@ -1,0 +1,116 @@
+{
+  "config": {
+    "version": "1.0",
+    "exam_name": "<div style=\"color: #3527F5; font-weight: bold; padding: 10px;\">PySpark</div>",
+	"link_base_url":"https://github.com/progressivepull/SandboxLoop/blob/main/explain_markdown",
+	"link_folder_name" : "QUESTION_*",
+	"link_file_name" : "QUESTION_*",
+	"link_terms" : "https://github.com/progressivepull/SandboxLoop/blob/main/explain_markdown/terms",
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "time_limit_minutes": 60
+  },
+  "questions": [
+    {
+      "id": 1,
+      "problem_description": [
+        {
+          "line": "A developer needs to check data after creation, <b>troubleshoot transformation errors</b>, and analyze data structures and values."
+        },
+        {
+          "line": "These activities are used daily on the job to maintain data integrity, support feature development, and ensure systems behave as expected."
+        }
+      ],
+      "question": [
+        {
+          "line": "What is the purpose of calling spark.createDataFrame(data).toDF(*columns) in the given PySpark code?"
+        }
+      ],
+      "options": {
+        "A": "To convert a Spark DataFrame into a Python list",
+        "B": "To filter rows based on the \"Payment_Done\" column",
+        "C": "To sort the dataset by \"Start_Date\"",
+        "D": "To apply a discount calculation to \"Course_Fees\"",
+        "E": "To create a Spark DataFrame from the given data and assign column names to it"
+      },
+      "answer": "E",
+      "resource": {
+        "code": {
+          "lines": [
+            { "line": "# Create a spark session" },
+            { "line": "from pyspark.sql import SparkSession" },
+            { "line": "from pyspark.sql.functions import lit" },
+            { "line": "spark = SparkSession.builder.appName('SparkExamples').getOrCreate()" },
+            { "line": "" },
+            { "line": "# Create a spark dataframe" },
+            { "line": "columns = [\"Name\", \"Course_Name\"," },
+            { "line": "           \"Months\"," },
+            { "line": "           \"Course_Fees\", \"Discount\"," },
+            { "line": "           \"Start_Date\", \"Payment_Done\"]" },
+            { "line": "data = [" },
+            { "line": "    (\"Amit Pathak\", \"Python\", 3," },
+            { "line": "     10000, 1000, \"02-07-2021\", True)," },
+            { "line": "    (\"Shikhar Mishra\", \"Soft skills\"," },
+            { "line": "     2, 8000, 800, \"07-10-2021\", False)," },
+            { "line": "    (\"Shivani Suvarna\", \"Accounting\", 6," },
+            { "line": "     15000, 1500, \"20-08-2021\", True)," },
+            { "line": "    (\"Pooja Jain\", \"Data Science\", 12," },
+            { "line": "     60000, 900, \"02-12-2021\", False)," },
+            { "line": "]" },
+            { "line": "df = spark.createDataFrame(data).toDF(*columns)" },
+            { "line": "" },
+            { "line": "# View the dataframe" },
+            { "line": "df.show()" }
+          ],
+          "language": "python"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "problem_description": [
+        {
+          "line": "A developer needs to check data after creation, troubleshoot transformation errors, and analyze data structures and values."
+        },
+        {
+          "line": "These activities are used daily on the job to maintain data integrity, support feature development, and ensure systems behave as expected."
+        }
+      ],
+      "question": [
+        {
+          "line": "What is the primary goal of data science?"
+        }
+      ],
+      "options": {
+        "A": "To design computer hardware components",
+        "B": "To create video games and animations",
+        "C": "To manage network security systems",
+        "D": "To extract insights and knowledge from data using analysis, statistics, and machine learning",
+        "E": "To build operating systems from scratch"
+      },
+      "answer": "D",
+      "resource": {
+       
+      }
+    },
+    {
+      "id": 3,
+      "question": [
+        {
+          "line": "Which PySpark code snippet correctly creates a new column called \"Country\" with a constant value \"USA\" in an existing DataFrame df?"
+        }
+      ],
+      "options": {
+        "A": "df.select(\"Country\" = \"USA\")",
+        "B": "df.addColumn(\"Country\", \"USA\")",
+        "C": "df.withColumn(\"Country\", \"USA\")",
+        "D": "df.createColumn(\"Country\", lit(\"USA\"))",
+        "E": "<br> from pyspark.sql.functions import lit <br> df = df.withColumn(\"Country\", lit(\"USA\"))"
+      },
+      "answer": "E",
+      "resource": {
+        
+      }
+    }
+  ]
+}
